@@ -1,0 +1,47 @@
+<% include partials/header %>
+
+
+  <nav class="navbar center fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fa fa-code fa-spin"></i>Blogsite</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/blogs/new">New Post</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="blogPost">
+
+  </div>
+
+
+
+  <script type="text/javascript">
+    const blogPostContainer = document.querySelector('.blogPost');
+    const blogData = <%-JSON.stringify(blogPostHTML) %>;
+    const blogCount = <%-JSON.stringify(blogCountHTML) %>;
+    console.log(blogCount);
+    blogData.forEach(elemen => {
+      // convert date to json
+      const realDate = new Date(JSON.parse(JSON.stringify(elemen.created)));
+      blogPostContainer.innerHTML += `
+    <h2>${elemen.title}</h2>
+    <img src="${elemen.image}" alt="">
+    <span>${realDate}</span>
+    <p>${elemen.post}</p>
+
+
+    `;
+    });
+  </script>
+
+  <%include partials/footer %>
