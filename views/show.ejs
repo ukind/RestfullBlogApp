@@ -8,13 +8,16 @@
   const moreInfo = <%-JSON.stringify(detailBlog) %>
   const content = document.querySelector('.content');
   content.innerHTML = `
-  ${moreInfo._id}
-  ${moreInfo.title}
-  ${moreInfo.post}
-  anggap aja sudsah bisa
-
-
-
+  <br />
+  Blog Title: ${moreInfo.title}<br />
+  Blog Image: ${moreInfo.image}<br />
+  Blog Content: ${moreInfo.post}<br />
+  <form action="/blogs/${moreInfo._id}?_method=delete" method="post">
+  <button>Delete</button>
+  </form>
+  <form action="/blogs/${moreInfo._id}/edit" method="get">
+  <button>Edit</button>
+  </form>
   `;
 </script>
 

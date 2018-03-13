@@ -110,8 +110,33 @@ app.get('/blogs/:id/edit', function(req, res) {
   });
 });
 
+// EDIT DATA
 app.put('/blogs/:id', function(req, res) {
-  res.send('update route');
+  const id = req.params.id;
+  Blog.findByIdAndUpdate(id, {
+    title: req.body.blog.title,
+    post: req.body.blog.post,
+    image: req.body.blog.image
+  }, function(error, result) {
+    if (error) {
+      res.redirect('/blogs');
+    } else {
+      res.redirect('/blogs/' + id);
+    }
+  });
+});
+
+// DELETE / REMOVE POST
+app.delete('/blogs/:id', function(req, res) {
+  const blogID = req.params.id;
+  // res.send('delete route reached');
+  Blog.findByIdAndRemove(blogID, function(error) {
+    if (error) {
+      console.log(error);
+    } else {
+      res.redirect('/blogs');
+    }
+  });
 });
 
 // error 404
