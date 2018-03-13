@@ -1,0 +1,57 @@
+<% include partials/header %>
+
+<nav class="navbar center fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><i class="fa fa-code fa-spin"></i>Blogsite</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/blogs/new">New Post</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="formContainer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const postID = <%-JSON.stringify(editPostHTML)%>;
+  const formContainer = document.querySelector('.formContainer');
+  // edit using post request, but in the end using put route
+  formContainer.innerHTML = `
+  <form action="/blogs/${postID._id} ?_method=put" method="post">
+    <div class="form-group">
+      <label for="PostTitle">Post Title</label>
+      <input type="text" class="form-control" id="PostTitle" placeholder="Post Title" name="blog[title]" value="${postID.title}">
+    </div>
+    <div class="form-group">
+      <label for="PostTitle">Image</label>
+      <input type="text" class="form-control" id="PostTitle" placeholder="Image" name="blog[image]" value="${postID.image}">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Post Articles</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="blog[post]" >${postID.post}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+
+
+
+  `;
+</script>
+
+<% include partials/footer %>
