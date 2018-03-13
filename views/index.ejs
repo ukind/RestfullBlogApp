@@ -29,18 +29,25 @@
     const blogPostContainer = document.querySelector('.blogPost');
     const blogData = <%-JSON.stringify(blogPostHTML) %>;
     const blogCount = <%-JSON.stringify(blogCountHTML) %>;
-    console.log(blogCount);
+    console.log(typeof blogCount);
+    console.log(blogData);
+    let postNumber = 1;
     blogData.forEach(elemen => {
+
       // convert date to json
       const realDate = new Date(JSON.parse(JSON.stringify(elemen.created)));
       blogPostContainer.innerHTML += `
-    <h2>${elemen.title}</h2>
-    <img src="${elemen.image}" alt="">
-    <span>${realDate}</span>
-    <p>${elemen.post}</p>
+      <div class="postNumber-${postNumber} blogPostContainer">
+        <h2>${elemen.title}</h2>
+        <img src="${elemen.image}" alt="">
+        <span>${realDate}</span>
+        <p>${elemen.post}</p>
+        <a href="/blogs/${elemen._id}">Read more</a>
+      </div>
 
 
     `;
+    postNumber++;
     });
   </script>
 
