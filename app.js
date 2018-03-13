@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -18,8 +19,8 @@ app.use('/vendor', express.static(__dirname + bootstrapCSS));
 app.use('/vendor', express.static(__dirname + jqueryJS));
 app.use('/vendor', express.static(__dirname + fontAwesome));
 app.use('/user', express.static(__dirname + user));
-
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 const blogSchema = new mongoose.Schema({
 

@@ -33,7 +33,7 @@
   const formContainer = document.querySelector('.formContainer');
   // edit using post request, but in the end using put route
   formContainer.innerHTML = `
-  <form action="/blogs/${postID._id} ?_method=put" method="post">
+  <form action="/blogs/${postID._id}?_method=put" method="post">
     <div class="form-group">
       <label for="PostTitle">Post Title</label>
       <input type="text" class="form-control" id="PostTitle" placeholder="Post Title" name="blog[title]" value="${postID.title}">
