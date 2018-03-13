@@ -1,0 +1,21 @@
+<% include partials/header %>
+
+<div class="content">
+
+</div>
+
+<script type="text/javascript">
+  const moreInfo = <%-JSON.stringify(detailBlog) %>
+  const content = document.querySelector('.content');
+  content.innerHTML = `
+  ${moreInfo._id}
+  ${moreInfo.title}
+  ${moreInfo.post}
+  anggap aja sudsah bisa
+
+
+
+  `;
+</script>
+
+<% include partials/footer %>
