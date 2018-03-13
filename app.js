@@ -60,6 +60,7 @@ app.get('/blogs', (req, res) => {
     return result;
   });
 
+  // joining all promise
   Promise.all([promise2, promise1]).then(function(value) {
     res.render('index', {blogPostHTML: value[0], blogCountHTML: value[1]});
   });
