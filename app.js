@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const expressSanitizer = require('express-sanitizer');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/vendor', express.static(__dirname + fontAwesome));
 app.use('/user', express.static(__dirname + user));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(expressSanitizer());
 
 const blogSchema = new mongoose.Schema({
 
@@ -75,6 +77,11 @@ app.get('/blogs', (req, res) => {
 
 // creating new blogpost
 app.post('/blogs', function(req, res) {
+  // sanitazing input
+  req.body.blog.title = req.sanitize(req.body.blog.title);
+  req.body.blog.post = req.sanitize(req.body.blog.post);
+  req.body.blog.image = req.sanitize(req.body.blog.image);
+  console.log(req.body);
   Blog.create({
     title: req.body.blog.title,
     post: req.body.blog.post,
@@ -113,6 +120,9 @@ app.get('/blogs/:id/edit', function(req, res) {
 // EDIT DATA
 app.put('/blogs/:id', function(req, res) {
   const id = req.params.id;
+  req.body.blog.title = req.sanitize(req.body.blog.title);
+  req.body.blog.post = req.sanitize(req.body.blog.post);
+  req.body.blog.image = req.sanitize(req.body.blog.image);
   Blog.findByIdAndUpdate(id, {
     title: req.body.blog.title,
     post: req.body.blog.post,
